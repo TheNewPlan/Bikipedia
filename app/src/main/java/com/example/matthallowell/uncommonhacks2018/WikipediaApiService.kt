@@ -17,13 +17,17 @@ interface WikipediaApiService {
 //                      @Query("list") list: String,
 //                      @Query("srsearch") srsearch: String): Observable<Model.Result>
 
-    @GET("api.php")
-    fun fetchArticle(@Query("action") action: String,
-                     @Query("prop") prop: String,
-                     @Query("rvprop") rvprop: String,
-                     @Query("rvsection") rvsection: Int,
-                     @Query("titles") titles: String,
-                     @Query("format") format: String) : Observable<ArticleModel.Result>
+    @GET("api.php?format=json&action=query&prop=extracts&exlimit=max&explaintext&exintro&redirects=&titles=Yahoo")
+//    fun getPage(@Query("titles") titles: String) : Observable<ArticleModel.Extract>
+
+    fun getPageID(@Query("titles") titles: String) : Observable<PageIDModel.Result>
+//    @GET("api.php")
+//    fun fetchArticle(@Query("action") action: String,
+//                     @Query("prop") prop: String,
+//                     @Query("rvprop") rvprop: String,
+//                     @Query("rvsection") rvsection: Int,
+//                     @Query("titles") titles: String,
+//                     @Query("format") format: String) : Observable<ArticleModel.Result>
 
     companion object {
         fun create(): WikipediaApiService {

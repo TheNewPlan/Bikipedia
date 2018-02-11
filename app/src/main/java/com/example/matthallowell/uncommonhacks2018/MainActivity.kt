@@ -29,11 +29,11 @@ class MainActivity : Activity() {
     }
 
     private fun beginSearch(searchString: String) {
-        disposable = wikipediaApiService.fetchArticle("query","revisions","content",0,searchString,"json")
+        disposable = wikipediaApiService.getPageID(searchString)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        { result -> txt_search_result.text = "${result.query.searchinfo.article}"},
+                        { result -> txt_search_result.text = "${result.query.pages.pageid.pageid}"},
                         { error -> Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show() }
                 )
 
